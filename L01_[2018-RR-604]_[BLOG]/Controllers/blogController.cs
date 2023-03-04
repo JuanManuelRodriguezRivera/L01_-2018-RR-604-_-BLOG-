@@ -33,12 +33,12 @@ namespace L01__2018_RR_604___BLOG_.Controllers
 
         public IActionResult FindByNombre(string filtro)
         {
-            blog? blog = (from e in _blogContext.blog where e.nombre.Contains(filtro) select e).FirstOrDefault();
-            if(blog == null)
+            Usuario? usuario = (from e in _blogContext.blog where e.nombreUsuario.Contains(filtro) select e).FirstOrDefault();
+            if(usuario == null)
             {
                 return NotFound();
             }
-            return Ok(blog);
+            return Ok(usuario);
         }
 
         [HttpGet]
@@ -46,12 +46,12 @@ namespace L01__2018_RR_604___BLOG_.Controllers
 
         public IActionResult FindByApellido(string filtro)
         {
-            blog? blog = (from e in _blogContext.blog where e.apellido.Contains(filtro) select e).FirstOrDefault();
-            if (blog == null)
+            usuario? usuarios = (from e in _blogContext.blog where e.apellido.Contains(filtro) select e).FirstOrDefault();
+            if (usuarios == null)
             {
                 return NotFound();
             }
-            return Ok(blog);
+            return Ok(Usuarios);
         }
 
         [HttpGet]
@@ -59,26 +59,26 @@ namespace L01__2018_RR_604___BLOG_.Controllers
 
         public IActionResult FindByRol(string filtro)
         {
-            blog? blog = (from e in _blogContext.blog where e.rol.Contains(filtro) select e).FirstOrDefault();
-            if (blog == null)
+            usuario? usuarios = (from e in _blogContext.blog where e.rol.Contains(filtro) select e).FirstOrDefault();
+            if (usuarios == null)
             {
                 return NotFound();
             }
-            return Ok(blog);
+            return Ok(usuarios);
         }
 
         [HttpGet]
         [Route("GetById/{usuario}")]
         public IActionResult Get(int usuarioId)
         {
-            blog? blog = (from e in _blogContext.blog
+            usuario? usuarios = (from e in _blogContext.blog
                           where e.usuarioId = usuarioId
                           select e).FirstOrDefault();
-            if (blog == null)
+            if (usuarios == null)
             {
                 return NotFound();
             }
-            return Ok(blog);
+            return Ok(usuarios);
         }
 
 
@@ -86,14 +86,14 @@ namespace L01__2018_RR_604___BLOG_.Controllers
         [Route("GetById/{publicacion}")]
         public IActionResult Get(int publicacionId)
         {
-            blog? blog = (from e in _blogContext.blog
+            publicaciones? publicacione = (from e in _blogContext.blog
                           where e.publicacionId = publicacionId
                           select e).FirstOrDefault();
-            if (blog == null)
+            if (publicacione == null)
             {
                 return NotFound();
             }
-            return Ok(blog);
+            return Ok(publicacione);
         }
     }
 }
