@@ -2,12 +2,12 @@
 {
     public class publicaciones
     {
-        public int publicacionId { get; set; }
+        public int PublicacionId { get; set; }
 
-        public string comentario { get; set; }
+        public string Comentario { get; set; }
 
-        public int? usuarioId { get; set; }
+        public int? UsuarioId { get; set; }
 
-        public int? calificacionId { get; set; }
+        public int? CalificacionId { get; set; }
     }
 }

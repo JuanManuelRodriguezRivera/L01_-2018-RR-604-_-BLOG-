@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using L01__2018_RR_604___BLOG_.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace L01__2018_RR_604___BLOG_.Controllers
 {
@@ -16,16 +18,41 @@ namespace L01__2018_RR_604___BLOG_.Controllers
             _blogContext = blogContext;
         }
         [HttpGet]
+        [Route("GetAll")]
+        public IActionResult Get()
+        {
+            List<Usuario> ListadoUsuario = (from e in _blogContext.Usuario select e).Tolist();
+            if (ListadoUsuario.Count()==0)
+            {
+                return NotFound();
+            }
+            return Ok(ListadoUsuario);
+        }
+        [HttpGet]
+        [Route("Find/{filtro}")]
+
+        public IActionResult FindByDescription(string filtro)
+        {
+            Usuario? usuarios = (from e in _blogContext.Usuario where e.NombreUsuario.Contains(filtro) select e).FirstOrDefault();
+            if (usuarios == null)
+            {
+                return NotFound();
+            }
+            return Ok(usuarios);
+        }
+
+
+        [HttpGet]
         [Route("Find/{filtro}")]
 
         public IActionResult FindByNombre(string filtro)
         {
-            Usuario? usuario = (from e in _blogContext.blog where e.nombreUsuario.Contains(filtro) select e).FirstOrDefault();
-            if(usuario == null)
+            Usuario? usuarios = (from e in _blogContext.Usuario where e.Nombre.Contains(filtro) select e).FirstOrDefault();
+            if(usuarios == null)
             {
                 return NotFound();
             }
-            return Ok(usuario);
+            return Ok(usuarios);
         }
 
         [HttpGet]
@@ -33,12 +60,12 @@ namespace L01__2018_RR_604___BLOG_.Controllers
 
         public IActionResult FindByApellido(string filtro)
         {
-            usuario? usuarios = (from e in _blogContext.blog where e.apellido.Contains(filtro) select e).FirstOrDefault();
+            Usuario? usuarios = (from e in _blogContext.Usuario where e.Apellido.Contains(filtro) select e).FirstOrDefault();
             if (usuarios == null)
             {
                 return NotFound();
             }
-            return Ok(Usuarios);
+            return Ok(usuarios);
         }
 
         [HttpGet]
@@ -46,7 +73,7 @@ namespace L01__2018_RR_604___BLOG_.Controllers
 
         public IActionResult FindByRol(string filtro)
         {
-            usuario? usuarios = (from e in _blogContext.blog where e.rol.Contains(filtro) select e).FirstOrDefault();
+            Usuario? usuarios = (from e in _blogContext.Usuario where e.RolId= ((filtro)) select e).FirstOrDefault();
             if (usuarios == null)
             {
                 return NotFound();
@@ -55,12 +82,24 @@ namespace L01__2018_RR_604___BLOG_.Controllers
         }
 
         [HttpGet]
-        [Route("GetById/{usuario}")]
+        [Route("GetAll")]
+        public IActionResult Get()
+        {
+            List<publicaciones> ListadoPublicaciones = (from e in _blogContext.Publicaciones select e).Tolist();
+            if (ListadoPublicaciones.Count() == 0)
+            {
+                return NotFound();
+            }
+            return Ok(ListadoPublicaciones);
+        }
+
+        [HttpGet]
+        [Route("GetById/{publicaciones}")]
         public IActionResult Get(int usuarioId)
         {
-            usuario? usuarios = (from e in _blogContext.blog
-                          where e.usuarioId = usuarioId
-                          select e).FirstOrDefault();
+            Usuario? usuarios = (from e in _blogContext.Publicaciones
+                          where e.UsuarioId = usuarioId
+                                 select e).FirstOrDefault();
             if (usuarios == null)
             {
                 return NotFound();
@@ -70,17 +109,29 @@ namespace L01__2018_RR_604___BLOG_.Controllers
 
 
         [HttpGet]
-        [Route("GetById/{publicacion}")]
-        public IActionResult Get(int publicacionId)
+        [Route("GetAll")]
+        public IActionResult Get()
         {
-            publicaciones? publicacione = (from e in _blogContext.blog
-                          where e.publicacionId = publicacionId
-                          select e).FirstOrDefault();
-            if (publicacione == null)
+            List<comentarios> ListadoComentario = (from e in _blogContext.Comentarios select e).Tolist();
+            if (ListadoComentario.Count() == 0)
             {
                 return NotFound();
             }
-            return Ok(publicacione);
+            return Ok(ListadoComentario);
+        }
+
+        [HttpGet]
+        [Route("GetById/{comentarios}")]
+        public IActionResult Get(string publicacionId)
+        {
+            comentarios? comentarios = (from e in _blogContext.comentarios
+                          where e.PublicacionId = publicacionId
+                          select e).FirstOrDefault();
+            if (comentarios == null)
+            {
+                return NotFound();
+            }
+            return Ok(comentarios);
         }
     }
 }

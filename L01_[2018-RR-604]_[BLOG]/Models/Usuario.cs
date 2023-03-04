@@ -1,13 +1,20 @@
-﻿namespace L01__2018_RR_604___BLOG_.Models
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
+namespace L01__2018_RR_604___BLOG_.Models
 {
-    public class Usuario
+    public class usuario
     {
-        public string nombreUsuario { get; set; }
+        public int UsurioId { get; set; }
+        
+        public int RolId { get; set; }
 
-        public string clave { get; set; }
+        public string NombreUsuario { get; set; }
 
-        public string nombre { get; set; }
+        public string Clave { get; set; }
 
-        public string apellido { get; set; }
+        public string Nombre { get; set; }
+
+        public string Apellido { get; set; }
     }
+
 }
