@@ -16,19 +16,6 @@ namespace L01__2018_RR_604___BLOG_.Controllers
             _blogContext = blogContext;
         }
         [HttpGet]
-        [Route("GetAll")]
-        public IActionResult Get()
-        {
-            List<blog> ListadoBlog = (from e in _blogContext.blog select e).ToList();
-
-            if (ListadoBlog.Count() == 0)
-            {
-                return NotFound();
-            }
-            return Ok(ListadoBlog);
-        }
-
-        [HttpGet]
         [Route("Find/{filtro}")]
 
         public IActionResult FindByNombre(string filtro)
