@@ -10,7 +10,7 @@ namespace L01__2018_RR_604___BLOG_.Models
 
         }
 
-        public DbSet<usuario> usuario{ get; set; }
+        public DbSet<usuarios> usuarios{ get; set; }
 
         public DbSet<comentarios> comentarios{ get; set; }
 

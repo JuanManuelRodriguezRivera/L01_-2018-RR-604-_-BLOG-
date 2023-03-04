@@ -1,13 +1,14 @@
-﻿namespace L01__2018_RR_604___BLOG_.Models
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+namespace L01__2018_RR_604___BLOG_.Models
 {
     public class publicaciones
     {
-        public int PublicacionId { get; set; }
+        public int publicacionId { get; set; }
 
-        public string Comentario { get; set; }
+        public string titulo { get; set; }
 
-        public int? UsuarioId { get; set; }
+        public string descripcion { get; set; }
 
-        public int? CalificacionId { get; set; }
+        public int? usuarioId { get; set; }
     }
 }
